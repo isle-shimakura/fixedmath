@@ -30,21 +30,13 @@ Fixed *fixed_mul_fixed(Fixed *this, Fixed *o)
 	this->fixedValue = (long)((long long)this->fixedValue * o->fixedValue / (USHRT_MAX + 1));
 #else
 	long fixedValue;
-	int minus = 0;
-	if (this->fixedValue < 0) {
-		minus++;
-		this->fixedValue = -this->fixedValue;
-	}
-	if (o->fixedValue < 0) {
-		minus++;
-		o->fixedValue = -o->fixedValue;
-	}
-	fixedValue = (this->fractValue * o->fractValue) >> (sizeof(short) * CHAR_BIT);
-	fixedValue += this->intValue * o->fractValue;
-	fixedValue += this->fixedValue * o->intValue;
-	if (minus & 1) {
-		fixedValue = -fixedValue;
-	}
+	long ah = this->intValue;
+	long al = this->fixedValue - ah * (USHRT_MAX + 1);
+	long bh = o->intValue;
+	long bl = o->fixedValue - bh * (USHRT_MAX + 1);
+	fixedValue = al * bl / (USHRT_MAX + 1);
+	fixedValue += ah * bl;
+	fixedValue += this->fixedValue * bh;
 	this->fixedValue = fixedValue;
 #endif
 	return this;
