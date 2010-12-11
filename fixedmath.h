@@ -33,8 +33,8 @@ union fixed {
 		unsigned short fractValue;
 		short intValue;
 #else
-		unsigned short fractValue;
 		short intValue;
+		unsigned short fractValue;
 #endif
 	};
 #ifdef __cplusplus
