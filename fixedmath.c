@@ -27,7 +27,7 @@ Fixed *fixed_add_int(Fixed *this, int i)
 Fixed *fixed_mul_fixed(Fixed *this, Fixed *o)
 {
 #if defined(LLONG_MAX)
-	this->fixedValue = (long)(((long long)this->fixedValue * o->fixedValue) >> (sizeof(short) * CHAR_BIT));
+	this->fixedValue = (long)((long long)this->fixedValue * o->fixedValue / (USHRT_MAX + 1));
 #else
 	long fixedValue;
 	int minus = 0;

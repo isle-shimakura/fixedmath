@@ -49,7 +49,7 @@ union fixed {
 	}
 	fixed &operator *=(const fixed &o) {
 #if defined(LLONG_MAX)
-		fixedValue = (long)(((long long)fixedValue * o.fixedValue) >> (sizeof(short) * CHAR_BIT));
+		fixedValue = (long)((long long)fixedValue * o.fixedValue / (USHRT_MAX + 1));
 #else
 		fixed_mul_fixed(this, &o);
 #endif
