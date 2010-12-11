@@ -265,16 +265,6 @@ Fixed sin13(int x)
 {
 	Fixed retval;
 
-#if defined(_WIN32)
-	if (x < 0) {
-		x = ~x;
-		x &= (M_PI * 2 - 1);
-		x = (M_PI * 2) - x;
-	}
-	else {
-		x &= (M_PI * 2 - 1);
-	}
-#else
 	if (x < 0) {
 		x = -(x + 1);
 		x %= (M_PI * 2);
@@ -283,7 +273,6 @@ Fixed sin13(int x)
 	else {
 		x %= (M_PI * 2);
 	}
-#endif
 	x >>= 2;
 
 	if (x < SIN_TABLE_LENGTH) {
