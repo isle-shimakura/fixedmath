@@ -29,7 +29,7 @@ Fixed *fixed_mul_int(Fixed *, int);
 union fixed {
 	long fixedValue;
 	struct {
-#ifndef BIG_ENDIAN
+#ifndef __BIG_ENDIAN__
 		unsigned short fractValue;
 		short intValue;
 #else
