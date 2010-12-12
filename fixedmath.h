@@ -47,6 +47,15 @@ union fixed {
 		tmp += o;
 		return tmp;
 	}
+	fixed &operator +=(int i) {
+		intValue += i;
+		return *this;
+	}
+	fixed operator +(int i) {
+		fixed tmp = *this;
+		tmp += i;
+		return tmp;
+	}
 	fixed &operator *=(const fixed &o) {
 #if defined(LLONG_MAX)
 		fixedValue = (long)((long long)fixedValue * o.fixedValue / (USHRT_MAX + 1));
