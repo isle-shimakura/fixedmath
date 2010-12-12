@@ -19,6 +19,8 @@ Fixed *fixed_set_int(Fixed *, int);
 int fixed_get_int(Fixed *);
 Fixed *fixed_add_fixed(Fixed *, Fixed *);
 Fixed *fixed_add_int(Fixed *, int);
+Fixed *fixed_sub_fixed(Fixed *, Fixed *);
+Fixed *fixed_sub_int(Fixed *, int);
 Fixed *fixed_mul_fixed(Fixed *, Fixed *);
 Fixed *fixed_mul_int(Fixed *, int);
 

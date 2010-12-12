@@ -24,6 +24,18 @@ Fixed *fixed_add_int(Fixed *this, int i)
 	return this;
 }
 
+Fixed *fixed_sub_fixed(Fixed *this, Fixed *o)
+{
+	this->fixedValue -= o->fixedValue;
+	return this;
+}
+
+Fixed *fixed_sub_int(Fixed *this, int i)
+{
+	this->intValue -= i;
+	return this;
+}
+
 Fixed *fixed_mul_fixed(Fixed *this, Fixed *o)
 {
 #if defined(LLONG_MAX)
