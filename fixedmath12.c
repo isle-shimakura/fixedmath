@@ -137,6 +137,7 @@ Fixed sin12(int x)
 {
 	Fixed retval;
 
+#if 1 /* コンパイラの最適化に期待 */
 	if (x < 0) {
 		x = -(x + 1);
 		x %= (M_PI * 2);
@@ -145,6 +146,16 @@ Fixed sin12(int x)
 	else {
 		x %= (M_PI * 2);
 	}
+#else
+	if (x < 0) {
+		x = ~x;
+		x &= (M_PI * 2 - 1);
+		x = (M_PI * 2) - x;
+	}
+	else {
+		x &= (M_PI * 2 - 1);
+	}
+#endif
 	x >>= 3;
 
 	if (x < SIN_TABLE_LENGTH) {
