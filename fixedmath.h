@@ -16,12 +16,12 @@ extern "C" {
 #endif
 
 Fixed *fixed_set_int(Fixed *, int);
-int fixed_get_int(Fixed *);
-Fixed *fixed_add_fixed(Fixed *, Fixed *);
+int fixed_get_int(const Fixed *);
+Fixed *fixed_add_fixed(Fixed *, const Fixed *);
 Fixed *fixed_add_int(Fixed *, int);
-Fixed *fixed_sub_fixed(Fixed *, Fixed *);
+Fixed *fixed_sub_fixed(Fixed *, const Fixed *);
 Fixed *fixed_sub_int(Fixed *, int);
-Fixed *fixed_mul_fixed(Fixed *, Fixed *);
+Fixed *fixed_mul_fixed(Fixed *, const Fixed *);
 Fixed *fixed_mul_int(Fixed *, int);
 
 #ifdef __cplusplus
@@ -44,7 +44,7 @@ union fixed {
 		fixedValue += o.fixedValue;
 		return *this;
 	}
-	fixed operator +(const fixed &o) {
+	fixed operator +(const fixed &o) const {
 		fixed tmp = *this;
 		tmp += o;
 		return tmp;
@@ -53,7 +53,7 @@ union fixed {
 		intValue += i;
 		return *this;
 	}
-	fixed operator +(int i) {
+	fixed operator +(int i) const {
 		fixed tmp = *this;
 		tmp += i;
 		return tmp;
@@ -62,7 +62,7 @@ union fixed {
 		fixedValue -= o.fixedValue;
 		return *this;
 	}
-	fixed operator -(const fixed &o) {
+	fixed operator -(const fixed &o) const {
 		fixed tmp = *this;
 		tmp -= o;
 		return tmp;
@@ -71,7 +71,7 @@ union fixed {
 		intValue -= i;
 		return *this;
 	}
-	fixed operator -(int i) {
+	fixed operator -(int i) const {
 		fixed tmp = *this;
 		tmp -= i;
 		return tmp;
@@ -84,7 +84,7 @@ union fixed {
 #endif
 		return *this;
 	}
-	fixed operator *(const fixed &o) {
+	fixed operator *(const fixed &o) const {
 		fixed tmp = *this;
 		tmp *= o;
 		return tmp;
@@ -93,7 +93,7 @@ union fixed {
 		fixedValue *= i;
 		return *this;
 	}
-	fixed operator *(int i) {
+	fixed operator *(int i) const {
 		fixed tmp = *this;
 		tmp *= i;
 		return tmp;
@@ -103,7 +103,7 @@ union fixed {
 		intValue = i;
 		return *this;
 	}
-	operator int() {
+	operator int() const {
 		return intValue;
 	}
 #endif
