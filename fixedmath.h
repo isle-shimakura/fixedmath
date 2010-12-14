@@ -120,6 +120,107 @@ union fixed {
 };
 
 #ifdef __cplusplus
+
+class CFixed
+{
+private:
+	fixed value;
+public:
+	CFixed() {
+		value = 0;
+	}
+	CFixed(int i) {
+		value = i;
+	}
+	CFixed(const CFixed &o) {
+		value = o.value;
+	}
+	CFixed(const fixed &o) {
+		value = o;
+	}
+	CFixed &operator +=(const CFixed &o) {
+		value += o.value;
+		return *this;
+	}
+	CFixed operator +(const CFixed &o) const {
+		CFixed tmp = *this;
+		tmp += o;
+		return tmp;
+	}
+	CFixed &operator +=(int i) {
+		value += i;
+		return *this;
+	}
+	CFixed operator +(int i) const {
+		CFixed tmp = *this;
+		tmp += i;
+		return tmp;
+	}
+	CFixed &operator -=(const CFixed &o) {
+		value -= o.value;
+		return *this;
+	}
+	CFixed operator -(const CFixed &o) const {
+		CFixed tmp = *this;
+		tmp -= o;
+		return tmp;
+	}
+	CFixed &operator -=(int i) {
+		value -= i;
+		return *this;
+	}
+	CFixed operator -(int i) const {
+		CFixed tmp = *this;
+		tmp -= i;
+		return tmp;
+	}
+	CFixed &operator *=(const CFixed &o) {
+		value *= o.value;
+		return *this;
+	}
+	CFixed operator *(const CFixed &o) const {
+		CFixed tmp = *this;
+		tmp *= o;
+		return tmp;
+	}
+	CFixed &operator *=(int i) {
+		value *= i;
+		return *this;
+	}
+	CFixed operator *(int i) const {
+		CFixed tmp = *this;
+		tmp *= i;
+		return tmp;
+	}
+	CFixed &operator /=(int i) {
+		value /= i;
+		return *this;
+	}
+	CFixed operator /(int i) const {
+		CFixed tmp = *this;
+		tmp /= i;
+		return tmp;
+	}
+	CFixed &operator =(int i) {
+		value = i;
+		return *this;
+	}
+	CFixed &operator =(const CFixed &o) {
+		value = o.value;
+		return *this;
+	}
+	CFixed &operator =(const fixed &o) {
+		value = o;
+		return *this;
+	}
+	operator int() const {
+		return int(value);
+	}
+	operator fixed() const {
+		return value;
+	}
+};
+
 extern "C" {
 #endif
 
