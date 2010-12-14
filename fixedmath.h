@@ -23,6 +23,7 @@ Fixed *fixed_sub_fixed(Fixed *, const Fixed *);
 Fixed *fixed_sub_int(Fixed *, int);
 Fixed *fixed_mul_fixed(Fixed *, const Fixed *);
 Fixed *fixed_mul_int(Fixed *, int);
+Fixed *fixed_div_int(Fixed *, int);
 
 #ifdef __cplusplus
 }
@@ -96,6 +97,15 @@ union fixed {
 	fixed operator *(int i) const {
 		fixed tmp = *this;
 		tmp *= i;
+		return tmp;
+	}
+	fixed &operator /=(int i) {
+		fixedValue /= i;
+		return *this;
+	}
+	fixed operator /(int i) const {
+		fixed tmp = *this;
+		tmp /= i;
 		return tmp;
 	}
 	fixed &operator =(int i) {

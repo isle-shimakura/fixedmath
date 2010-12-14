@@ -59,3 +59,9 @@ Fixed *fixed_mul_int(Fixed *this, int i)
 	this->fixedValue *= i;
 	return this;
 }
+
+Fixed *fixed_div_int(Fixed *this, int i)
+{
+	this->fixedValue /= i;
+	return this;
+}
