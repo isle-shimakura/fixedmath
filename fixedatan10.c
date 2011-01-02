@@ -1,7 +1,7 @@
 #include "fixedmath.h"
 
 #define ATAN_TABLE_LENGTH (1<<10) /* 45“x‚Ì•ªŠ„” */
-static const short atan_table[] = {
+static const int16_t atan_table[] = {
 	   0,   5,  10,  15,  20,  25,  30,  35,
 	  40,  45,  50,  56,  61,  66,  71,  76,
 	  81,  86,  91,  96, 101, 106, 112, 117,

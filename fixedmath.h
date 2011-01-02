@@ -1,7 +1,7 @@
 #ifndef FIXEDMATH_H
 #define FIXEDMATH_H
 
-#include <limits.h>
+#include <stdint.h>
 
 /**
  *  â~é¸ó¶ÇÕï™äÑêîÇÃ2ï™ÇÃ1
@@ -30,15 +30,10 @@ Fixed *fixed_div_int(Fixed *, int);
 #endif
 
 union fixed {
-	long fixedValue;
+	int32_t fixedValue;
 	struct {
-#ifndef __BIG_ENDIAN__
-		unsigned short fractValue;
-		short intValue;
-#else
-		short intValue;
-		unsigned short fractValue;
-#endif
+		uint16_t fractValue;
+		int16_t  intValue;
 	};
 #ifdef __cplusplus
 	fixed &operator +=(const fixed &o) {
@@ -78,8 +73,8 @@ union fixed {
 		return tmp;
 	}
 	fixed &operator *=(const fixed &o) {
-#if defined(LLONG_MAX)
-		fixedValue = (long)((long long)fixedValue * o.fixedValue / (USHRT_MAX + 1));
+#if defined(INT64_MAX)
+		fixedValue = (int32_t)((int64_t)fixedValue * o.fixedValue / (UINT16_MAX + 1));
 #else
 		fixed_mul_fixed(this, &o);
 #endif

@@ -38,15 +38,15 @@ Fixed *fixed_sub_int(Fixed *this, int i)
 
 Fixed *fixed_mul_fixed(Fixed *this, const Fixed *o)
 {
-#if defined(LLONG_MAX)
-	this->fixedValue = (long)((long long)this->fixedValue * o->fixedValue / (USHRT_MAX + 1));
+#if defined(INT64_MAX)
+	this->fixedValue = (int32_t)((int64_t)this->fixedValue * o->fixedValue / (UINT16_MAX + 1));
 #else
-	long fixedValue;
-	long ah = this->intValue;
-	long al = this->fixedValue - ah * (USHRT_MAX + 1);
-	long bh = o->intValue;
-	long bl = o->fixedValue - bh * (USHRT_MAX + 1);
-	fixedValue = al * bl / (USHRT_MAX + 1);
+	int32_t fixedValue;
+	int32_t ah = this->intValue;
+	int32_t al = this->fixedValue - ah * (UINT16_MAX + 1);
+	int32_t bh = o->intValue;
+	int32_t bl = o->fixedValue - bh * (UINT16_MAX + 1);
+	fixedValue = al * bl / (UINT16_MAX + 1);
 	fixedValue += ah * bl;
 	fixedValue += this->fixedValue * bh;
 	this->fixedValue = fixedValue;
