@@ -1,6 +1,10 @@
 #ifndef FIXEDMATH_H
 #define FIXEDMATH_H
 
+#ifdef _MSC_VER
+#pragma comment(lib, "fixedmath.lib")
+#endif
+
 #include <stdint.h>
 
 /**
