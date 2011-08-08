@@ -39,14 +39,14 @@ Fixed *fixed_sub_int(Fixed *this, int i)
 Fixed *fixed_mul_fixed(Fixed *this, const Fixed *o)
 {
 #if defined(INT64_MAX)
-	this->fixedValue = (int32_t)((int64_t)this->fixedValue * o->fixedValue / (UINT16_MAX + 1));
+	this->fixedValue = (int32_t)((int64_t)this->fixedValue * o->fixedValue / (1<<FIXEDMATH_FRACT_BITS));
 #else
 	int32_t fixedValue;
 	int32_t ah = this->intValue;
-	int32_t al = this->fixedValue - ah * (UINT16_MAX + 1);
+	int32_t al = this->fixedValue - ah * (1<<FIXEDMATH_FRACT_BITS);
 	int32_t bh = o->intValue;
-	int32_t bl = o->fixedValue - bh * (UINT16_MAX + 1);
-	fixedValue = al * bl / (UINT16_MAX + 1);
+	int32_t bl = o->fixedValue - bh * (1<<FIXEDMATH_FRACT_BITS);
+	fixedValue = al * bl / (1<<FIXEDMATH_FRACT_BITS);
 	fixedValue += ah * bl;
 	fixedValue += this->fixedValue * bh;
 	this->fixedValue = fixedValue;

@@ -12,6 +12,8 @@
  */
 #define M_PI ((1U<<15)/2) /* 32768/2 */
 
+#define FIXEDMATH_FRACT_BITS 16 /* ¬”•”‚Í16ƒrƒbƒg */
+
 union fixed;
 typedef union fixed Fixed;
 
@@ -78,7 +80,7 @@ union fixed {
 	}
 	fixed &operator *=(const fixed &o) {
 #if defined(INT64_MAX)
-		fixedValue = (int32_t)((int64_t)fixedValue * o.fixedValue / (UINT16_MAX + 1));
+		fixedValue = (int32_t)((int64_t)fixedValue * o.fixedValue / (1<<FIXEDMATH_FRACT_BITS));
 #else
 		fixed_mul_fixed(this, &o);
 #endif
